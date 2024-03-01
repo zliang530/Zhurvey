@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  frontend-app:
+    container_name: frontend-app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/src:/app/src
+      - ./frontend/vite.config.js:/app/vite.config.js
+      - frontend_modules_volume:/app/node_modules
+    ports:
+     - 3000:3000
+volumes:
+    frontend_modules_volume:
+        external: false
