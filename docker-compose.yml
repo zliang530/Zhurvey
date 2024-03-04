@@ -13,6 +13,24 @@ services:
       - frontend_modules_volume:/app/node_modules
     ports:
      - 3000:3000
+    depends_on:
+      - mysql-server
+  mysql-server:
+    container_name: mysql-server
+    image: mysql:8.0.36
+    environment:
+      MYSQL_ROOT_PASSWORD: This@wesomePa55word
+      MYSQL_DATABASE: Zhurvey
+      MYSQL_USER: user1
+      MYSQL_PASSWORD: letmein
+      MYSQL_HOST: localhost
+      MYSQL_TCP_PORT: 3309
+    ports:
+      - 3309:3309
+    volumes:
+      - mysql_volume:/var/lib/mysql
 volumes:
+    mysql_volume:
+        external: false
     frontend_modules_volume:
         external: false
