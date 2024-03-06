@@ -1,13 +1,22 @@
 package com.zhenql.zhurvey.Users;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.zhenql.zhurvey.Questions.Questions;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter @Setter
 public class Users {
 
     
@@ -20,4 +29,7 @@ public class Users {
 
     @Column
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Questions> questions = new HashSet<>();
 }
